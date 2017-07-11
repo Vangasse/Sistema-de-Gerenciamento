@@ -40,9 +40,9 @@ public class Sistema {
 			recurso[i] = sscanner.nextLine();
 			estado[i] = "Em processo de alocacao";
 		}
-		String[] data = new String[10];
-		String[] inicio = new String[10];
-		String[] termino = new String[10];
+		int[] data = new int[10];
+		int[] inicio = new int[10];
+		int[] termino = new int[10];
 		String[] alocacao = new String[10];
 		String[] responsavel = new String[10];
 		String[] descricao = new String[10];
@@ -54,11 +54,11 @@ public class Sistema {
 		switch(index) {
 		case 1:
 			System.out.println("Informe a data da atividade:\t");
-			String curr_data = sscanner.nextLine();
+			int curr_data = iscanner.nextInt();
 			System.out.println("Informe a hora de inicio da atividade:\t");
-			String curr_inicio = sscanner.nextLine();
+			int curr_inicio = iscanner.nextInt();
 			System.out.println("Informe a hora de termino da atividade:\t");
-			String curr_termino = sscanner.nextLine();
+			int curr_termino = iscanner.nextInt();
 			System.out.println("Informe o nome do recurso necessario para a execucao da atividade:\t");
 			String curr_alocacao = sscanner.nextLine();
 			System.out.println("Informe o nome do responsavel pela atividade:\t");
@@ -90,13 +90,31 @@ public class Sistema {
 			}while(i < userqnt);
 			
 			if(teste_user == 1) {
-				data[aloc] = curr_data;
-				inicio[aloc] = curr_inicio;
-				termino[aloc] = curr_termino;
-				alocacao[aloc] = curr_alocacao;
-				responsavel[aloc] = curr_responsavel;
-				descricao[aloc] = curr_descricao;
-				aloc++;
+				int teste_time = 1;
+				for(i = 0; i <= aloc; i++) {
+					if(curr_alocacao.equals(alocacao[i])) {
+						if(curr_data == data[i]) {
+							if(inicio[i] < curr_inicio && termino[i] > curr_inicio) {
+								teste_time = 0;
+							}
+							else if(inicio[i] < curr_termino && termino[i] > curr_termino) {
+								teste_time = 0;
+							}
+						}
+					}
+				}
+				if(teste_time == 1) {
+					data[aloc] = curr_data;
+					inicio[aloc] = curr_inicio;
+					termino[aloc] = curr_termino;
+					alocacao[aloc] = curr_alocacao;
+					responsavel[aloc] = curr_responsavel;
+					descricao[aloc] = curr_descricao;
+					aloc++;
+				}
+				else {
+					System.out.println("Choque de Horario.\n");
+				}
 			}
 			else {
 				System.out.println("Cadastro nao permitido.\n");
@@ -123,6 +141,7 @@ public class Sistema {
 						System.out.println("Fim do Historico do Usuario\n");
 						q = aloc+1;
 					}
+					q++;
 				}while(q <= aloc);
 				if(teste_userhist == 0) {
 					System.out.println("Usuario nao encontrado");
@@ -150,4 +169,3 @@ public class Sistema {
 	}
 
 }
-
