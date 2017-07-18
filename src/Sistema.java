@@ -49,7 +49,7 @@ public class Sistema {
 		int[] userindex = new int[10];
 		int aloc = 0;
 		do {
-		System.out.println("\n\nNavegacao\n[1] - Realizar Alocacao\n[2] - Realizar Consulta\n[3] - Exibir Relatorios\n");
+		System.out.println("\n\nNavegacao\n[1] - Realizar Alocacao\n[2] - Realizar Consulta\n[3] - Exibir Relatorios\n[4] - Confirmar Alocacao\n[5] - Concluir Alocacao\n");
 		index = iscanner.nextInt();
 		switch(index) {
 		case 1:
@@ -104,6 +104,11 @@ public class Sistema {
 					}
 				}
 				if(teste_time == 1) {
+					for(i = 0; i < recqnt; i++) {
+						if(curr_alocacao.equals(recurso[i])) {
+							estado[i] = "Alocado";
+						}
+					}
 					data[aloc] = curr_data;
 					inicio[aloc] = curr_inicio;
 					termino[aloc] = curr_termino;
@@ -156,15 +161,68 @@ public class Sistema {
 					if(curr_recurso.equals(alocacao[p])) {
 						System.out.println("Usuario:\t"+responsavel[p]+"\nAtividade:\t"+descricao[p]+"\n");
 					}
+					p++;
 				}while(p <= aloc);
 				break;
 			}
 			break;
 		case 3:
 			System.out.println("Numero de Usuarios: "+userqnt+"\n");
+			int proc_cont = 0;
+			int alo_cont = 0;
+			int and_cont = 0;
+			int conc_cont = 0;
+			for(int rec_cont = 0; rec_cont < recqnt; rec_cont++) {
+				if(estado[rec_cont].equals("Em processo de alocacao")) {
+					proc_cont++;
+				}
+				else if(estado[rec_cont].equals("Alocado")) {
+					alo_cont++;
+				}
+				else if(estado[rec_cont].equals("Em andamento")) {
+					and_cont++;
+				}
+				else if(estado[rec_cont].equals("Concluido")) {
+					conc_cont++;
+				}
+			}
+			System.out.println("Numero de Recursos em Processo de Alocacao: "+proc_cont+"\n");
+			System.out.println("Numero de Recursos em Estado Alocado: "+alo_cont+"\n");
+			System.out.println("Numero de Recursos em Andamento: "+and_cont+"\n");
+			System.out.println("Numero de Recursos Concluidos: "+conc_cont+"\n");
+			
 			System.out.println("Numero de Alocacoes: "+aloc+"\n");
+			int aula_cont=0;
+			int lab_cont=0;
+			int diversos_cont=0;
+			for(int aloc_cont = 0; aloc_cont < aloc; aloc_cont++) {
+				if(descricao[aloc_cont].equals("Aula Tradicional")) {
+					aula_cont++;
+				}
+				else if(descricao[aloc_cont].equals("Laboratorio")) {
+					lab_cont++;
+				}
+				else {
+					diversos_cont++;
+				}
+			}
+			System.out.println("Numero de Aulas Tradicionais: "+aula_cont+"\n");
+			System.out.println("Numero de Laboratorios: "+lab_cont+"\n");
+			System.out.println("Numero das demais Atividades: "+diversos_cont+"\n");
+			
+			break;
+		case 4:
+			System.out.println("Informe o indice da Atividade:\t");
+			int indice = iscanner.nextInt();
+			estado[indice] = "Em andamento";
+			break;
+		case 5:
+			System.out.println("Informe o indice da Atividade:\t");
+			indice = iscanner.nextInt();
+			estado[indice] = "Concluido";
 			break;
 		}
+		
 		}while(index == 1 || index == 2 || index == 3);
 	}
 
