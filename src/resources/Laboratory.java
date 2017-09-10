@@ -7,5 +7,7 @@ public class Laboratory extends ResourceChain{
 		super(id);
 		// TODO Auto-generated constructor stub
 	}
-
+	public String getType() {
+		return "Laboratory";
+	}
 }

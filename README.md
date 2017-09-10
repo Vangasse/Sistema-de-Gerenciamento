@@ -1,3 +1,5 @@
 # Sistema-de-Gerenciamento
 
-STATE, INTERPRETER, CHAIN OF RESPONSABILITY
+STATE, CHAIN OF RESPONSABILITY
+
+Me confundi ao escolher Interpreter, pude implementar os outros dois.

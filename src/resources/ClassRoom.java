@@ -7,5 +7,7 @@ public class ClassRoom extends ResourceChain{
 		super(id);
 		// TODO Auto-generated constructor stub
 	}
-
+	public String getType() {
+		return "ClassRoom";
+	}
 }

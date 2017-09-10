@@ -31,6 +31,14 @@ public abstract class AbstractActivity {
 	String support_material = "";
 	String type = "";
 	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	int sdate = 0;
 	int edate = 0;
 	int shour = 0;
@@ -70,6 +78,14 @@ public abstract class AbstractActivity {
 
 	ActivityState state = new InProcessOfAllocation();
 	
+	public ActivityState getState() {
+		return state;
+	}
+
+	public void setState(ActivityState state) {
+		this.state = state;
+	}
+
 	public AbstractActivity(ResourceChain resource, AbstractUser user, String title, String description,
 			String participants, String support_material, String type, int sdate, int edate,
 			int shour, int ehour){
@@ -89,8 +105,18 @@ public abstract class AbstractActivity {
 		this.ehour = ehour;
 	}
 	
-	public void updateStatus() {};
+	public void updateStatus(String index) {
+		if(index.equals("Confirmado")) {
+			setState(state.toConfirmed());
+		}
+		else if(index.equals("Concluido")) {
+			setState(state.toFinished());
+		}
+		else if(index.equals("Alocado")) {
+			setState(state.toAllocated());
+		}
+	};
 	public String toString() {
-		return "";
+		return title+" "+resource.getType()+" "+user.getName()+" "+"etc.";
 	};
 }

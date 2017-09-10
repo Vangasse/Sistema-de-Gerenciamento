@@ -7,5 +7,7 @@ public class Auditorium extends ResourceChain{
 		super(id);
 		// TODO Auto-generated constructor stub
 	}
-
+	public String getType() {
+		return "Auditorium";
+	}
 }

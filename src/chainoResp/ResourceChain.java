@@ -62,4 +62,5 @@ public abstract class ResourceChain {
 		}
 		return activities;
 	}
+	public abstract String getType();
 }
